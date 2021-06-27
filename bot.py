@@ -79,9 +79,9 @@ while True:
                 sellorders('{}'.format(symbol.strip()), int(position.qty))
         except:
             continue
-
-    if float(account.cash) <= 0:
-        break
+    #add this back later maybe.
+    #if float(account.cash) <= 0:
+        #break
         
 
 
