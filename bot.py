@@ -11,10 +11,6 @@ api = tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets', api
 
 
 
-
-
-
-
 #print(account.status)
 
 #print(account)
@@ -79,14 +75,13 @@ while True:
 
         try:
             position = api.get_position('{}'.format(symbol.strip()))
-            for things in position:
-                if things.symbol == symbol.strip() and stock.get_analysis().summary['RECOMMENDATION'] == "SELL":
-                    sellorders('{}'.format(symbol.strip()), int(things.qty))
+            if position.symbol == symbol.strip() and stock.get_analysis().summary['RECOMMENDATION'] == "SELL":
+                sellorders('{}'.format(symbol.strip()), int(position.qty))
         except:
             continue
 
-        if float(account.cash) <= 0:
-            break
+    if float(account.cash) <= 0:
+        break
         
 
 
