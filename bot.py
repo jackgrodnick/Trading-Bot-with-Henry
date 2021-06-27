@@ -89,11 +89,11 @@ while clock.is_open:
 
 #quantity = str(input("enter the quantity of stock you want to buy ")).strip()
 account = api.get_account()
-position = tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets/v2/positions')
+#position = tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets/v2/positions')
 #buyorders(tick, int(quantity))
 #print(account.cash)
 #print(json.dumps(tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets/v2/positions/aapl}', api_version='v2')))
 
-print('Percent Change of Account Today: ' + str((float(account.last_equity) - float(account.equity))/float(account.equity)))
+print('Percent Change of Account Today: ' + str((float(account.last_equity) - float(account.equity))/float(account.equity)) + '%')
 
 
