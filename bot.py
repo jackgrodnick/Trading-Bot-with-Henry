@@ -55,7 +55,7 @@ def sellorders(ticker, quantity):
 #asset = api.get_asset('AAPL')
 #print(asset.exchange)
 
-while True:
+while clock.is_open:
     for symbol in symbolsinqqqm:
 
         account = api.get_account()
