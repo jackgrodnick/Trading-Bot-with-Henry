@@ -57,7 +57,7 @@ while 1 == 1:
     #asset = api.get_asset('AAPL')
     #print(asset.exchange)
 
-    printcount = 0
+    printcount = 1
 
     while clock.is_open:
         for symbol in symbolsinqqqm:
@@ -92,6 +92,8 @@ while 1 == 1:
                 if position.symbol == symbol.strip() and stock.get_analysis().summary['RECOMMENDATION'] == "SELL":
                     sellorders('{}'.format(symbol.strip()), int(position.qty))
             except:
+                if not clock.is_open:
+                    break
                 continue
         #add this back later maybe.
         #if float(account.cash) <= 0:
@@ -112,7 +114,7 @@ while 1 == 1:
 
 
     if printcount > 0:
-        print('Percent Change of Account Today: ' + str((float(account.last_equity) - float(account.equity))/float(account.equity)) + '%')
+        print('Percent Change of Account Today: ' + str(((float(account.equity) - float(account.last_equity))/float(account.equity))*100) + '%')
 
 
     time.sleep(60)
