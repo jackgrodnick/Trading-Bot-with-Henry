@@ -17,12 +17,12 @@ while 1 == 1:
 
     #print(account)
 
-    lines = open("data/qqqm.csv").readlines()
+    lines = open("data/NASDAQsmall.csv").readlines()
 
     #for line in lines:
         #print(line)
 
-    symbolsinqqqm = [line.split(",")[2] for line in lines][1:-90]
+    symbolsinqqqm = [line.split(",")[0] for line in lines][1:]
 
     #print(symbolsinqqqm)
 
@@ -62,20 +62,30 @@ while 1 == 1:
     while clock.is_open:
         for symbol in symbolsinqqqm:
             printcount += 1
+            
             account = api.get_account()
             #asset = tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets/v2/assets/{}'.format(symbol.strip()))
-            asset = api.get_asset('{}'.format(symbol.strip()))
+            
             #print(asset)
 
-            stock = TA_Handler(
-                symbol='{}'.format(symbol.strip()),
-                screener="america",
-                exchange=asset.exchange,
-                interval=Interval.INTERVAL_1_DAY
-            )
+            try:
+                asset = api.get_asset('{}'.format(symbol.strip()))
+                stock = TA_Handler(
+                    symbol='{}'.format(symbol.strip()),
+                    screener="america",
+                    exchange=asset.exchange,
+                    interval=Interval.INTERVAL_1_DAY
+                )
+            except:
+                continue
 
-            if stock.get_analysis().summary['RECOMMENDATION'] == "BUY" and float(account.cash) > 0:
-                buyorders('{}'.format(symbol.strip()), 1)
+            try:
+                if stock.get_analysis().summary['RECOMMENDATION'] == "BUY" and float(account.cash) > 0:
+                    buyorders('{}'.format(symbol.strip()), 1)
+            except:
+                continue
+
+            
 
             try:
                 position = api.get_position('{}'.format(symbol.strip()))
