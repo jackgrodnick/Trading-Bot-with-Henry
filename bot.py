@@ -57,10 +57,12 @@ while 1 == 1:
     #asset = api.get_asset('AAPL')
     #print(asset.exchange)
 
-    printcount = 1
+    printcount = 0
 
     while clock.is_open:
+
         for symbol in symbolsinqqqm:
+            clock = api.get_clock()
             printcount += 1
             
             account = api.get_account()
