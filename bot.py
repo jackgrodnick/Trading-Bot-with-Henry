@@ -77,12 +77,16 @@ while 1 == 1:
                     interval=Interval.INTERVAL_1_DAY
                 )
             except:
+                if not clock.is_open:
+                    break
                 continue
 
             try:
                 if stock.get_analysis().summary['RECOMMENDATION'] == "BUY" and float(account.cash) > 0:
                     buyorders('{}'.format(symbol.strip()), 1)
             except:
+                if not clock.is_open:
+                    break
                 continue
 
             
