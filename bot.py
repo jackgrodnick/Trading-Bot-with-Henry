@@ -59,13 +59,25 @@ while 1 == 1:
 
     printcount = 0
 
-    while clock.is_open:
 
+    while clock.is_open:
         for symbol in symbolsinqqqm:
-            clock = api.get_clock()
+
+            try:
+                clock = api.get_clock()
+            except:
+                if not clock.is_open:
+                    break
+                continue
+
             printcount += 1
             
-            account = api.get_account()
+            try:
+                account = api.get_account()
+            except:
+                if not clock.is_open:
+                    break
+                continue
             #asset = tradeapi.REST(API_KEY, SECRET_KEY, 'https://paper-api.alpaca.markets/v2/assets/{}'.format(symbol.strip()))
             
             #print(asset)
