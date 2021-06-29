@@ -66,8 +66,6 @@ while 1 == 1:
             try:
                 clock = api.get_clock()
             except:
-                if not clock.is_open:
-                    break
                 continue
 
             printcount += 1
