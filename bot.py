@@ -63,6 +63,9 @@ while 1 == 1:
     while clock.is_open:
         for symbol in symbolsinqqqm:
 
+            if not clock.is_open:
+                break
+
             try:
                 clock = api.get_clock()
             except:
@@ -111,6 +114,8 @@ while 1 == 1:
                 if not clock.is_open:
                     break
                 continue
+
+            time.sleep(60)
         #add this back later maybe.
         #if float(account.cash) <= 0:
             #break
